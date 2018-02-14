@@ -16,16 +16,16 @@ block content
 
   div
     ul.nav.nav-tabs(role='tablist')
-      li.active(role='presentation')
+      li(role='presentation').collapse(class=account.contractState ? '' : 'active')
         a(href='#transactions', aria-controls='transactions', role='tab', data-toggle='tab') Transactions
       if account.isContract
         li(role='presentation')
           a(href='#code', aria-controls='code', role='tab', data-toggle='tab') Code
       if account.source
-        li(role='presentation')
+        li(role='presentation').collapse(class=account.contractState ? 'active' : '')
           a(href='#contractState', aria-controls='source', role='tab', data-toggle='tab') Contract State
     .tab-content
-      #transactions.tab-pane.active(role='tabpanel')
+      #transactions.tab-pane(role='tabpanel').collapse(class=account.contractState ? '' : 'active')
         h3 Recent Activity
         table.table
           thead
@@ -103,7 +103,7 @@ block content
             a(href="/contract/verify") Upload source
           pre #{account.code}
       if account.source
-        #contractState.tab-pane(role='tabpanel')
+        #contractState.tab-pane(role='tabpanel').collapse(class=account.contractState ? 'active' : '')
           h4 Current contract state
           table.table
             thead

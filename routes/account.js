@@ -56,10 +56,10 @@ router.get('/:account', function(req, res, next) {
         var abi = JSON.parse(data.source.abi);
         var contract = web3.eth.contract(abi).at(req.params.account);
 
-        let { contractMethod, contractMethodArgs } = req.query
+        let { contractMethod, contractMethodArgs } = req.query;
 
         if (contractMethod) {
-          contractMethodArgs = contractMethodArgs && contractMethodArgs.split(',') || []
+          contractMethodArgs = contractMethodArgs && contractMethodArgs.split(',') || [];
 
           contract[contractMethod](...contractMethodArgs, function(err, result) {
             data.contractState.push({ name: `${contractMethod}(${contractMethodArgs.join(', ')})`, result: result });
